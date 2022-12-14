@@ -5,7 +5,7 @@ from rest_framework.generics import CreateAPIView
 from rest_framework.parsers import MultiPartParser
 from rest_framework.response import Response
 from rest_framework import  status
-from .models import Userface
+from .models import UserFace
 from django.http import HttpResponse
 
 class ImageUploadView(CreateAPIView):
@@ -16,7 +16,7 @@ class ImageUploadView(CreateAPIView):
 
 
 class ImageUploadViewSet(viewsets.ModelViewSet):
-    queryset = Userface.objects.all()
+    queryset = UserFace.objects.all()
     serializer_class = ImageUploadSerializer
 
 

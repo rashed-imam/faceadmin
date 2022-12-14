@@ -1,7 +1,7 @@
 from django.db import models
 
 
-class Userface(models.Model):
+class UserFace(models.Model):
     name = models.CharField(max_length=128)
     image = models.ImageField(upload_to="face-data/")
     created_at = models.DateTimeField(auto_now_add=True)
@@ -30,9 +30,9 @@ class Employee(models.Model):
         return self.name
 
 
-class Attandance(models.Model):
+class Attendance(models.Model):
     date = models.DateTimeField()
-    employe = models.ForeignKey(Employee, on_delete=models.CASCADE)
+    employee = models.ForeignKey(Employee, on_delete=models.CASCADE)
 
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

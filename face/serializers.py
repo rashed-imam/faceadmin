@@ -1,11 +1,11 @@
 from rest_framework import serializers
 
-from  .models import Userface
+from  .models import UserFace
 
 
 # class UserfaceSerializer(serializers.ModelSerializer):
 #     class Meta:
-#         model = Userface
+#         model = UserFace
 #         # fields = ('email', 'phone', 'query', 'type', 'status', 'response')
 #
 
@@ -13,7 +13,7 @@ from  .models import Userface
 class ImageUploadSerializer(serializers.HyperlinkedModelSerializer):
 
     class Meta:
-        model = Userface
+        model = UserFace
         fields= (
             'name',
             'image'
