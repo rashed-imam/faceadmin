@@ -5,7 +5,7 @@ from face.models import UserFace, Employee, Service, Attendance
 
 
 @admin.register(UserFace)
-class UserfaceAdmin(admin.ModelAdmin):
+class UserFaceAdmin(admin.ModelAdmin):
     list_display = ['image_tag', "name"]
     search_fields = ['name']
     list_filter = ["created_at", "updated_at"]
