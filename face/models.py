@@ -1,9 +1,13 @@
 from django.db import models
 
 
+def file_path(instance, pathfilename):
+    return f"face-data/%Y/%m/%d/"
+
+
 class UserFace(models.Model):
     name = models.CharField(max_length=128, blank=True)
-    image = models.ImageField(upload_to="face-data/")
+    image = models.ImageField(upload_to='face-data/%Y/%m/%d/')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
