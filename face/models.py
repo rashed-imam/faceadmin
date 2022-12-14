@@ -2,13 +2,13 @@ from django.db import models
 
 
 class UserFace(models.Model):
-    name = models.CharField(max_length=128)
+    name = models.CharField(max_length=128, blank=True)
     image = models.ImageField(upload_to="face-data/")
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return self.name
+        return self.image.url
 
 
 class Service(models.Model):
