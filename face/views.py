@@ -7,6 +7,7 @@ from rest_framework.response import Response
 from rest_framework import  status
 from .models import UserFace
 from django.http import HttpResponse
+from recognition_controller import recognition_controller
 
 class ImageUploadView(CreateAPIView):
     parser_classes = (MultiPartParser,)
@@ -23,9 +24,7 @@ class ImageUploadViewSet(viewsets.ModelViewSet):
     def create(self, request, *args, **kwargs):
         super().create(request, *args, **kwargs)
         print(request.data,"rq datat")
-        serializer = self.get_serializer(data=request.data)
-        if serializer.is_valid():
-            return Response(data=serializer.data,status=status.HTTP_200_OK)
-        return Response(data=None, status=status.HTTP_400_BAD_REQUEST)
+        results = recognition_controller(request.img_path)
+        return HttpResponse(results)
     # def perform_create(self, serializer):
     #     serializer.save()
