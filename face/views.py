@@ -21,15 +21,12 @@ class ImageUploadViewSet(viewsets.ModelViewSet):
 
     def create(self, request, *args, **kwargs):
         super().create(request, *args, **kwargs)
-        # path = "./face-data/"+self.request.data['image'].name
         path = f".{str(UserFace.objects.last())}"
-        print(path)
-
         if not has_face(path):
-            data = {"messages": "No face Found",
+            data = {"message": "No face Found",
                     "isKnown": False,
                     }
-            return JsonResponse(data=data, safe=False, status=status.HTTP_404_NOT_FOUND)
+            return JsonResponse(data=data, safe=False, status=status.HTTP_200_OK)
 
         results = recognition_controller(path)
         is_known = True
@@ -37,13 +34,9 @@ class ImageUploadViewSet(viewsets.ModelViewSet):
             results = "User Not Found"
             is_known = False
 
-        data = {"messages": results,
+        data = {"message": results,
                 "isKnown": is_known,
                 }
 
         return JsonResponse(data=data, safe=False, status=status.HTTP_200_OK)
 
-    # def perform_create(self, serializer):
-    #     path = self.request.data['image'].name
-    #     print(path.replace(" ", "_"))
-    #     serializer.save(name=path.replace(" ", "_"))
