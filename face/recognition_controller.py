@@ -2,6 +2,7 @@ import time
 
 import face_recognition
 import numpy as np
+from PIL import Image
 
 
 def load_known_data(encoding_filename, records_filename):
@@ -15,12 +16,17 @@ def load_known_data(encoding_filename, records_filename):
 
 
 def has_face(unknown_face_path):
-    unknown_face_image = face_recognition.load_image_file(unknown_face_path)
-    try:
-        unknown_face_encoding = face_recognition.face_encodings(unknown_face_image)[0]
-    except IndexError:
-        return False
-    return True
+        im = Image.open(unknown_face_path)
+        # Rotate the image by 90 degrees counterclockwise
+        im_rotated = im.transpose(Image.ROTATE_90)
+        im_rotated.save(unknown_face_path)
+        unknown_face_image = face_recognition.load_image_file(unknown_face_path)
+        try:
+            unknown_face_encoding = face_recognition.face_encodings(unknown_face_image)[0]
+        except IndexError:
+
+            return False
+        return True
 
 
 def learn_unknown_face(unknown_face_path):
